@@ -1,5 +1,3 @@
-# TowerOfHanoiV2
-
 # Tower of Hanoi
 A graphical interface to Tower of Hanoi mathematical problem made with angular
 <br>

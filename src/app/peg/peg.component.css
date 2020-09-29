@@ -1,0 +1,15 @@
+.disc-div {
+  position: relative;
+  margin: 1em;
+}
+
+.disc {
+  margin: auto;
+  position: absolute;
+  line-height: 1.4;
+  color: white;
+}
+
+.disc-div img {
+  width: 130%;
+}

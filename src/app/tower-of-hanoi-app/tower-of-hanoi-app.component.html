@@ -1,0 +1,74 @@
+<div class="main">
+  <div class="controls-div">
+    <mat-form-field>
+      <mat-label>Select number of discs</mat-label>
+      <mat-select 
+        [(value)]="numOfDiscs" 
+        (selectionChange)="initialize()"
+        [disabled]="startedCalculating"
+      >
+        <mat-option *ngFor="let nDiscs of [3, 5, 7, 10]" [value]="nDiscs">
+          {{nDiscs}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Solution mode</mat-label>
+      <mat-select [(value)]="solutionMode" [disabled]="startedCalculating">
+        <mat-option value="auto">
+          Automatic
+        </mat-option>
+        <mat-option value="step">
+          Step by step
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="solutionMode === 'auto'">
+      <mat-label>Animation speed</mat-label>
+      <mat-select [(value)]="animationMs" [disabled]="startedCalculating">
+        <mat-option value="1000">
+          1 second
+        </mat-option>
+        <mat-option value="500">
+          Half second
+        </mat-option>
+        <mat-option value="100">
+          100 miliseconds
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button 
+      mat-flat-button 
+      color="primary" 
+      (click)="start()"
+      [disabled]="startedCalculating"
+    >Start</button>
+    <button 
+      mat-flat-button 
+      color="accent" 
+      (click)="this.reset()"
+      *ngIf="startedCalculating"
+    >Cancel</button>
+  </div>
+  <div class="peg-main-div">
+    <div class="peg-div">
+      <div class="peg"><app-peg [(discs)]="pegs[0]"></app-peg></div>
+      <div class="peg"><app-peg [(discs)]="pegs[1]"></app-peg></div>
+      <div class="peg"><app-peg [(discs)]="pegs[2]"></app-peg></div>
+    </div>
+  </div>
+  <div class="state-div">
+    <button
+      *ngIf="solutionMode === 'step' && startedCalculating === true"
+      mat-flat-button 
+      color="primary" 
+      (click)="moveDisc(currentStep)"
+    >Next step</button>
+    <mat-card class="state-card">
+      <b>Current state: {{state}}</b>
+    </mat-card>
+    <mat-card class="state-card">
+      <b>Current step: {{currentStep}}</b>
+    </mat-card>
+  </div>
+</div>
